@@ -1,0 +1,81 @@
+.mainC #pos{
+    position: absolute;
+    bottom: 9em;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    left: 10%;
+}
+.mainC{
+    top: 0;
+    right: 0;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding: 30px;
+    position:fixed;
+    height: 100vh;
+    min-width: 300px;
+    width: 35%;
+    background-color: white;
+    z-index: 1;
+    color: #222222;
+    transition: 0.5s;
+}
+.mainC.open{
+    right: -41%;
+    opacity: 0;
+}
+.mainC #arrow{
+    width: 25px;
+    position: absolute;
+    left: 81%;
+    top: 28px;
+}
+.mainC #name{
+    margin-left: 27px;
+    display: inline;
+    position: absolute;
+    top: 80px;
+}
+.mainC #img{
+    width: 100px;
+    display: inline;
+}
+.mainC .check{
+    position: absolute;
+    width: 80%;
+    height: 5vh;
+    margin: 0px 3%;
+    font-size: 18px;
+}
+.mainC #view{
+    background-color:#E5E7EB;
+    color: black;  
+    bottom: 8em;
+}
+.mainC #out{
+    background-color: black;
+    color: white;
+    bottom: 5em;
+}
+.mainC #del{
+    font-size: 22px;
+    position: absolute;
+    bottom: 9.9em;
+    right: 2em;
+}
+.mainC #added{
+    max-height: 60vh;
+    overflow: auto;
+}
+.mainC #footer{
+    background-color: white;
+}
+.mainC a{
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

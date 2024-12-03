@@ -1,0 +1,52 @@
+@media (max-width:1024px){
+#cover{
+    display: none;
+}
+}
+.Cont{
+    padding-left: 10%;
+}
+.FSection{
+    width: 100%;
+    height: 600px;
+    padding-top: 200px;
+    background-image: url("./1.png");
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+#cover{
+    height: 43em;
+    position: absolute;
+    right: 10%;
+    top: 100px;
+}
+.line{
+    margin: 2px 16px 4px 2px;
+    display: inline-block;
+    background-color: red;
+    height: 2px;
+    width: 40px;
+    transition: 1s;
+}
+.linetext:hover{
+    cursor: pointer;
+}
+.linetext:hover .line{
+    cursor: pointer;
+    width: 10px;
+}
+.text{
+    display: inline;
+}
+h1{
+    width: 60%;
+    font-size: 70px;
+    font-weight: lighter;
+}
+#a{
+    padding-bottom: 4px;
+    text-decoration: none;
+    border-bottom: 2px solid black;
+    color: black;
+    font-weight: 600;
+}

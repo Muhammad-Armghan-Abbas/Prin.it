@@ -1,0 +1,12 @@
+@media (min-width:450px) {
+  .items{
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+@media (min-width:1024px) {
+  .items{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}

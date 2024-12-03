@@ -1,0 +1,11 @@
+.checkout-main{
+    width: 50vw;
+    margin: 80px auto;
+    min-height: 50vw;
+}
+.checkout-main #form{
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
