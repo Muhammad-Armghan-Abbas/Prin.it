@@ -27,7 +27,14 @@ const CartState = (props) => {
             setCartItems(prev => ({ ...initialCart, ...prev }));
         };
         fetchData();
-    }, []);    function updateState(id) {
+    }, []);
+
+    // Add useEffect to track cartItems changes
+    useEffect(() => {
+        updateState();
+    }, [cartItems]);
+
+    function updateState(id) {
         // Calculate total number of items in cart
         const newState = Object.values(cartItems).reduce((acc, curr) => acc + (curr || 0), 0);
         setState(newState);
@@ -61,7 +68,7 @@ const CartState = (props) => {
         if (typeof product === 'number' || typeof product === 'string') {
             setCartItems((prev) => {
                 const newCart = { ...prev, [product]: (prev[product] || 0) + 1 };
-                setTimeout(() => updateState(), 0);
+                updateState(); // Update state immediately
                 return newCart;
             });
             return product;
@@ -82,7 +89,7 @@ const CartState = (props) => {
         setItem(prevItems => [...prevItems, customizedProduct]);
         setCartItems(prev => {
             const newCart = { ...prev, [customProductId]: 1 };
-            setTimeout(() => updateState(), 0);
+            updateState(); // Update state immediately
             return newCart;
         });
         return customProductId;
