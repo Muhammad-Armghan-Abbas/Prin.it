@@ -26,12 +26,12 @@
     right: -41%;
     opacity: 0;
 }
-.mainC #arrow{
+/* .mainC #arrow{
     width: 25px;
     position: absolute;
     left: 81%;
     top: 28px;
-}
+} */
 .mainC #name{
     margin-left: 27px;
     display: inline;
@@ -45,19 +45,23 @@
 .mainC .check{
     position: absolute;
     width: 80%;
-    height: 5vh;
     margin: 0px 3%;
     font-size: 18px;
+}
+.mainC .check:hover{
+    cursor: pointer;
 }
 .mainC #view{
     background-color:#E5E7EB;
     color: black;  
     bottom: 8em;
+    padding: 10px;
 }
 .mainC #out{
     background-color: black;
     color: white;
     bottom: 5em;
+    padding: 10px;
 }
 .mainC #del{
     font-size: 22px;
@@ -78,4 +82,92 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+.mainC .warning {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+.shopping-bag-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: white;
+}
+
+.bag-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.item-count {
+    margin-left: 0.5rem;
+    color: #666;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.close-btn img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s;
+}
+
+.close-btn:hover img {
+    transform: translateX(2px);
+}
+
+.cart-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+}
+
+.cart-total {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.clear-cart {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.clear-cart:hover {
+    background-color: #fee2e2;
+}
+
+#added {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.mainC {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 400px;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
 }

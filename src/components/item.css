@@ -6,6 +6,26 @@
     margin: auto;
     padding:1em 2em;
 }
+
+@media (max-width: 768px) {
+    .item1{
+        min-width: 100%;
+        margin: 10px;
+    }
+    .items{
+        padding: 0.5em 1em;
+    }
+    #box {
+        transform: scale(0.9);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .item1{
+        min-width: 45%;
+        margin: 15px;
+    }
+}
 .img1{
     min-height: 150px;
     max-height: 150px;
@@ -18,36 +38,91 @@
     justify-content: center;
     align-items: center;
     border: 0.5px solid #e5e7eb;
-   padding: 10%;
+    padding: 10%;
+    position: relative;
+    overflow: hidden;
 }
 .imgC:hover .img1{
-scale: 1.2;
-}
-.imgC:hover #box{
-display: inline-block;
-opacity: 1;
-margin: 15px 0em 7em 9em;
+    transform: scale(1.1);
 }
 #box{
     position: absolute;
-    margin: 15px 0em 7em 10.8em;
-    opacity: 0;
-    border: transparent;
-    transition: 0.4s ease-out;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    transition: 0.3s ease-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+    #box {
+        opacity: 0;
+    }
+    .imgC:hover #box {
+        opacity: 1;
+    }
 }
 #plus{
     font-stretch: extra-condensed;
     color: white;
-    padding: 0 12px;
-    font-size: 40px;
-    background-color: rgba(239, 68, 68,0.95);
+    padding: 8px;
+    font-size: 20px;
+    background-color: rgba(239, 68, 68, 0.95);
+    border: none;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+#customize {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.98);
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 #eye{
-    color: white;
-    background-color: rgba(247, 244, 244, 0.9);
-    font-size: 22px;
-    padding: 7px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.95);
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 0 0 4px 4px;
+    margin-top: auto;
 }
+
+#plus:hover {
+    background-color: rgba(239, 68, 68, 1);
+}
+
+#customize:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#eye:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#plus:active,
+#customize:active,
+#eye:active {
+    transform: translateY(0);
+    opacity: 0.9;
+}
+
+@media (hover: none) {
+    #plus:hover,
+    #eye:hover,
+    #customize:hover {
+        transform: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
 button:hover{
     cursor: pointer;
 }

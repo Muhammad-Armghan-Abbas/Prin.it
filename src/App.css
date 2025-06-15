@@ -10,3 +10,22 @@
     grid-template-columns: 25% 25% 25% 25%;
   }
 }
+
+/* Global styles for main content spacing */
+main, 
+.admin-container,
+.orders-section,
+.products-section,
+.checkout-main,
+.view-container,
+.customize-container,
+.sign-cont,
+.user-dashboard {
+  padding-top: calc(var(--header-height) + 20px) !important;
+  min-height: 100vh;
+}
+
+/* Prevent overlap with fixed header */
+.modal-overlay {
+  padding-top: var(--header-height);
+}

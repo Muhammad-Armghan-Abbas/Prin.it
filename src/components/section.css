@@ -43,7 +43,7 @@ h1{
     font-size: 70px;
     font-weight: lighter;
 }
-#a{
+.FSection #a{
     padding-bottom: 4px;
     text-decoration: none;
     border-bottom: 2px solid black;

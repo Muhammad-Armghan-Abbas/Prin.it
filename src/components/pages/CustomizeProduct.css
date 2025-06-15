@@ -1,0 +1,147 @@
+.customizer-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.customizer-header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.side-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.side-selector button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.side-selector button.active {
+  background: #000;
+  color: white;
+  border-color: #000;
+}
+
+.customizer-main {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 30px;
+  min-height: 600px;
+}
+
+.canvas-container {
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.customizer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.upload-section {
+  text-align: center;
+  padding: 20px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-input {
+  margin-bottom: 10px;
+}
+
+.upload-hint {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.price-section {
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.price-section h3 {
+  margin: 10px 0;
+  color: #666;
+}
+
+.price-section h2 {
+  margin: 20px 0 0;
+  font-size: 24px;
+  color: #000;
+}
+
+.done-button {
+  padding: 15px 30px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.done-button:hover {
+  background: #333;
+}
+
+.mode-toggle {
+  margin-top: 5px;
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  align-self: center;
+}
+
+.mode-toggle:hover {
+  background: #f5f5f5;
+}
+
+.mode-toggle.edit-mode {
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+
+.mode-toggle.preview-mode {
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+@media (max-width: 768px) {
+  .customizer-main {
+    grid-template-columns: 1fr;
+  }
+  
+  .canvas-container {
+    min-height: 400px;
+  }
+}
