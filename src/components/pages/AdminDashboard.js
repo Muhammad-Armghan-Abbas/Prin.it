@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../../firebase';
-import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { auth, db } from '../../firebase.js';
+import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import '../../styles/AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -36,17 +36,41 @@ const AdminDashboard = () => {
   const [orderFilter, setOrderFilter] = useState('all');
   const [orderSearch, setOrderSearch] = useState('');
   const [orderSort, setOrderSort] = useState('date-desc');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const checkAdminStatus = async (user) => {
       if (!user) {
         navigate('/admin/login');
+        return;
       }
+
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (!userDoc.exists() || userDoc.data().role !== 'admin') {
+          setError('Unauthorized access');
+          navigate('/');
+          return;
+        }
+        
+        // Proceed with data fetching only if admin
+        await fetchProducts();
+        await fetchOrders();
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Error verifying admin status:', err);
+        setError('Error verifying permissions');
+        navigate('/');
+      }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      checkAdminStatus(user);
     });
 
-    fetchProducts();
-    fetchOrders();
     return () => unsubscribe();
   }, [navigate]);
 
@@ -251,6 +275,19 @@ const AdminDashboard = () => {
     return filtered;
   };
   
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return null; // Component will unmount due to navigation
+  }
+
   return (
     <div className="admin-container">
       <div className="admin-header">

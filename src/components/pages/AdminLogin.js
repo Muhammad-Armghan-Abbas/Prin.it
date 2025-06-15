@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase.js';
 import { useNavigate } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
 
-const AdminLogin = () => {
-  const [credentials, setCredentials] = useState({
-    email: 'armaghanabbas11@gmail.com', // Pre-fill admin email
+const AdminLogin = () => {    const [credentials, setCredentials] = useState({
+    email: '',
     password: ''
   });
   const [error, setError] = useState('');
@@ -25,12 +25,18 @@ const AdminLogin = () => {
         credentials.password
       );
 
-      if (userCredential.user) {
-        console.log('Login successful, user:', userCredential.user.email);
-        console.log('Navigating to admin dashboard...');
+      // Verify admin role
+      const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+      if (!userDoc.exists() || userDoc.data().role !== 'admin') {
+        await auth.signOut();
+        setError('Unauthorized access. This portal is for administrators only.');
         setLoading(false);
-        navigate('/admin', { replace: true });
+        return;
       }
+
+      console.log('Admin login successful');
+      setLoading(false);
+      navigate('/admin', { replace: true });
     } catch (error) {
       console.error('Login error:', error.code, error.message);
       switch (error.code) {

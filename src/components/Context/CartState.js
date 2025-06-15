@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import CartContext from "./CartContext";
-import { db } from "../../firebase";
+import CartContext from "./CartContext.js";
+import { db } from "../../firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 
 const CartState = (props) => {

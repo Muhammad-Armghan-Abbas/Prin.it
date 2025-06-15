@@ -1,19 +1,20 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import View from './components/pages/View.js';
-import Home from './components/pages/Home.js'
+import Home from './components/pages/Home.js';
 import ShoppingBag from './components/ShoppingBag.js';
-import Header from './components/header.js'
+import Header from './components/header.js';
 import Footer from './components/footer.js';
 import Checkout from './components/pages/checkout.js';
 import AuthForm from './components/pages/SignInSignUp.js';
 import ScrollToTop from './components/ScrollToTop.js';
-import AdminLogin from './components/pages/AdminLogin';
-import AdminDashboard from './components/pages/AdminDashboard';
-import UserDashboard from './components/pages/UserDashboard';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import CustomizeProduct from './components/pages/CustomizeProduct';
-import { auth } from './firebase';
+import AdminLogin from './components/pages/AdminLogin.js';
+import AdminDashboard from './components/pages/AdminDashboard.js';
+import UserDashboard from './components/pages/UserDashboard.js';
+import ProtectedRoute from './components/auth/ProtectedRoute.js';
+import AdminRoute from './components/auth/AdminRoute.js';
+import CustomizeProduct from './components/pages/CustomizeProduct.js';
+import { auth } from './firebase.js';
 
 function App() {
   document.addEventListener('scroll', () => {
@@ -34,11 +35,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/auth' element={<AuthForm />} />
           <Route path='/login' element={<AuthForm mode="login" />} />
-          <Route path='/view/:id' element={<View />} />
-          <Route path='/admin' element={
-            <ProtectedRoute>
+          <Route path='/view/:id' element={<View />} />          <Route path='/admin' element={
+            <AdminRoute>
               <AdminDashboard />
-            </ProtectedRoute>
+            </AdminRoute>
           } />
           <Route path='/admin/login' element={<AdminLogin />} />
           <Route path='/account' element={

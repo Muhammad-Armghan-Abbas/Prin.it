@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import "./checkout.css";
-import CartContext from "../Context/CartContext";
-import AddedItem from "../addedItem";
+import CartContext from "../Context/CartContext.js";
+import AddedItem from "../addedItem.js";
 import { collection, addDoc, setDoc, doc, getDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebase'; 
+import { db, auth } from '../../firebase.js';
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 

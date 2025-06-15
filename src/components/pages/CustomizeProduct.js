@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Stage, Layer, Image as KonvaImage, Transformer } from 'react-konva';
-import CartContext from '../Context/CartContext';
+import CartContext from '../Context/CartContext.js';
 import './CustomizeProduct.css';
 
 const CustomizeProduct = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../firebase.js';
 import { doc, getDoc, collection, getDocs, updateDoc } from 'firebase/firestore';
-import CartContext from '../Context/CartContext';
+import CartContext from '../Context/CartContext.js';
 import { useNavigate } from 'react-router-dom';
 import './UserDashboard.css';
 

@@ -1,8 +1,8 @@
 import "./ShoppingBag.css"
-import CartContext from "./Context/CartContext";
+import CartContext from "./Context/CartContext.js";
 import { useContext, useState, useEffect, useRef } from "react";
-import { Bag } from "./Context/Bag";
-import AddedItem from "./addedItem";
+import { Bag } from "./Context/Bag.js";
+import AddedItem from "./addedItem.js";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function ShoppingBag() {

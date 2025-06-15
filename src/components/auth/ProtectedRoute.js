@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { auth } from '../../firebase';
-import CartContext from '../Context/CartContext';
+import { auth } from '../../firebase.js';
+import CartContext from '../Context/CartContext.js';
 
 const ProtectedRoute = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import "./header.css";
-import CartContext from "./Context/CartContext";
-import { Bag } from "./Context/Bag";
+import CartContext from "./Context/CartContext.js";
+import { Bag } from "./Context/Bag.js";
 import { Link } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth } from "../firebase.js";
 function Header(){
     const b = useContext(Bag);
     const a = useContext(CartContext);

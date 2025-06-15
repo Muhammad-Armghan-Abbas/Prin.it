@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./View.css";
 import { useParams } from "react-router-dom";
-import CartContext from "../Context/CartContext";
+import CartContext from "../Context/CartContext.js";
 function View() {
   const a = useContext(CartContext);
   const { id } = useParams();
