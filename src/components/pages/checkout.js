@@ -19,6 +19,7 @@ function Checkout() {
     setUserId,
     clearCart 
   } = useContext(CartContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -72,9 +73,14 @@ function Checkout() {
   // Validate phone format (optional field)
   const isValidPhone = (phone) => {
     return phone === '' || /^\+?[\d\s-]+$/.test(phone);
-  };
-  const handleCheckOut = async () => {
+  };  const handleCheckOut = async () => {
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      return;
+    }
+    
     try {
+      setIsSubmitting(true);
       const user = auth.currentUser;
       if (!user) {
         navigate('/auth');
@@ -189,17 +195,18 @@ function Checkout() {
       await setDoc(doc(db, 'orders', orderRef.id), {
         ...orderData,
         orderId: orderRef.id
-      });
-
-      alert("Order placed successfully!");
+      });      alert("Order placed successfully!");
       clearCart();
-      navigate('/');    } catch (error) {
+      navigate('/');
+    } catch (error) {
       console.error("Error placing order:", error);
       alert(
         error.code === 'permission-denied' 
           ? "You don't have permission to place orders. Please log in again."
           : "Failed to place the order. Please try again."
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -287,13 +294,16 @@ function Checkout() {
       </div>
 
       <div id="pos">Total: ${total.toFixed(2)}</div>
-      
-      <div className="checkout-buttons">
-        <button className="check clear-cart" onClick={delAll}>
+        <div className="checkout-buttons">
+        <button className="check clear-cart" onClick={delAll} disabled={isSubmitting}>
           🗑️ Clear Cart
         </button>
-        <button className="check place-order" onClick={handleCheckOut}>
-          Place Order
+        <button 
+          className="check place-order" 
+          onClick={handleCheckOut} 
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Placing Order...' : 'Place Order'}
         </button>
       </div>
     </div>
