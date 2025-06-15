@@ -215,11 +215,20 @@ const CustomizeProduct = () => {
           customizationFee: 5.00
         },
         finalPrice: parseFloat(product.price) + 5.00
-      };
-
-      const customProductId = addToCart(customizedProduct);
-      updateState(customProductId);
-      navigate('/checkout');
+      };      // Create a unique ID for the customized product
+      const customProductId = `custom_${product.id}_${Date.now()}`;
+      customizedProduct.id = customProductId;
+      customizedProduct.type = 'customized';
+      customizedProduct.originalProduct = product;
+      
+      // Add the customized product and update cart
+      const addedId = addToCart(customizedProduct);
+      if (addedId) {
+        updateState(addedId);
+        navigate('/checkout');
+      } else {
+        alert('Error adding customized product to cart');
+      }
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('There was an error adding the item to cart. Please try again.');
@@ -232,7 +241,7 @@ const CustomizeProduct = () => {
     <div className="customizer-container">
       <div className="customizer-header">
         <h1>Customize {product.title}</h1>
-        <div className="controls-row">
+        {/* <div className="controls-row">
           <div className="side-selector">
             <button 
               className={side === 'front' ? 'active' : ''} 
@@ -247,7 +256,7 @@ const CustomizeProduct = () => {
               Back
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="customizer-main">

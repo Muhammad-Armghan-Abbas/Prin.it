@@ -17,12 +17,10 @@ function AddedItem({ item, type, name, price, link, id, customization }) {
     
     const basePrice = parseFloat(itemData.price || price);
     const customFee = (itemData.customization || customization) ? 5.00 : 0;
-    const totalPrice = basePrice + customFee;
-      function add() {
-        if (!itemData.customization) {  // Only allow incrementing non-customized products
-            a.addToCart(itemData.id);
-            a.updateState(itemData.id);
-        }
+    const totalPrice = basePrice + customFee;      function add() {
+        // Allow incrementing both regular and customized products
+        a.addToCart(itemData.id);
+        a.updateState(itemData.id);
     }
     
     function remove() {
@@ -57,11 +55,10 @@ function AddedItem({ item, type, name, price, link, id, customization }) {
                         <p className="customization-fee">Customization fee: $5.00</p>
                     </div>
                 )}
-                <div className="item-controls">
-                    <div className="quantity-controls">
+                <div className="item-controls">                    <div className="quantity-controls">
                         <button onClick={remove} disabled={quantity <= 1}>-</button>
                         <span>{quantity}</span>
-                        <button onClick={add} disabled={!!itemData.customization}>+</button>
+                        <button onClick={add}>+</button>
                     </div>
                     <button className="remove-item" onClick={handleRemoveItem}>
                         Remove

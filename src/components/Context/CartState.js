@@ -64,35 +64,69 @@ const CartState = (props) => {
         });
         return cart;
     };    const addToCart = (product) => {
-        // If product is an ID (regular product)
-        if (typeof product === 'number' || typeof product === 'string') {
-            setCartItems((prev) => {
-                const newCart = { ...prev, [product]: (prev[product] || 0) + 1 };
-                updateState(); // Update state immediately
-                return newCart;
+        // If product is already in cart (has an existing ID)
+        if (typeof product === 'string' || typeof product === 'number') {
+            const productId = product.toString();
+            // Find the item to get its data
+            const itemData = item.find(it => it.id.toString() === productId);
+            if (!itemData) {
+                console.error('Product not found:', productId);
+                return null;
+            }
+
+            // Handle both regular and customized products
+            setCartItems(prev => {
+                const currentQty = prev[productId] || 0;
+                // For customized products, just increment the quantity
+                if (productId.startsWith('custom_') || itemData.customization) {
+                    return {
+                        ...prev,
+                        [productId]: currentQty + 1
+                    };
+                }
+                // For regular products
+                return {
+                    ...prev,
+                    [productId]: currentQty + 1
+                };
             });
-            return product;
+            updateState();
+            return productId;
         }
 
-        // If product is a customized product object
-        const customProductId = `custom_${product.id}_${Date.now()}`;
-        const customizedProduct = {
-            ...product,
-            id: customProductId,
-            originalId: product.id,
-            price: product.price || 0,
-            finalPrice: (parseFloat(product.price) || 0) + (product.customization?.customizationFee || 5.00),
-            quantity: 1
-        };
+        // Handle new customized product
+        if (product.customization) {
+            // Add the customized product to items array first
+            const customizedProduct = {
+                ...product,
+                type: 'customized',
+                finalPrice: parseFloat(product.price) + (product.customization.customizationFee || 5.00)
+            };
+            
+            setItem(prevItems => [...prevItems, customizedProduct]);
+            
+            // Then add it to cart
+            setCartItems(prev => ({
+                ...prev,
+                [customizedProduct.id]: 1
+            }));
+            
+            updateState();
+            return customizedProduct.id;
+        }
 
-        // Add to items array and cart
-        setItem(prevItems => [...prevItems, customizedProduct]);
-        setCartItems(prev => {
-            const newCart = { ...prev, [customProductId]: 1 };
-            updateState(); // Update state immediately
-            return newCart;
-        });
-        return customProductId;
+        // Handle regular product addition
+        if (product.id) {
+            setCartItems(prev => ({
+                ...prev,
+                [product.id]: (prev[product.id] || 0) + 1
+            }));
+            updateState();
+            return product.id;
+        }
+
+        console.error('Invalid product:', product);
+        return null;
     };
 
     const removeFromCart = (id) => {

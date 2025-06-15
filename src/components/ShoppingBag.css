@@ -26,6 +26,12 @@
     right: -41%;
     opacity: 0;
 }
+@media(max-width:767px){
+  .mainC.open{
+    right: -100%;
+    opacity: 0;
+}  
+}
 /* .mainC #arrow{
     width: 25px;
     position: absolute;
