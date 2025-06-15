@@ -1,16 +1,41 @@
 import "./ShoppingBag.css"
 import CartContext from "./Context/CartContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { Bag } from "./Context/Bag";
 import AddedItem from "./addedItem";
-import { useNavigate } from "react-router-dom";
-/*import { Link } from "react-router-dom";*/
+import { useNavigate, useLocation } from "react-router-dom";
+
 function ShoppingBag() {
     const [warning, setWarning] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+    const bagRef = useRef(null);
     const a = useContext(CartContext);
-    const { cartItems } = useContext(CartContext)
-    const b = useContext(Bag);
+    const { cartItems } = useContext(CartContext);
+    const b = useContext(Bag);    useEffect(() => {
+        // Close bag on route change
+        if (b.open) {
+            upd();
+        }
+    }, [location]);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            const toggleButton = document.querySelector('.toggle-cart');
+            if (bagRef.current && 
+                !bagRef.current.contains(event.target) && 
+                !toggleButton?.contains(event.target) &&
+                b.open) {
+                upd();
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     function upd() {
         b.update();
     }
@@ -19,8 +44,10 @@ function ShoppingBag() {
         a.setState(0);
     }
     const total = a.getTotal();    return (
-        <div className={`mainC ${b.open ? 'open' : 'close'}`}>
-            <div className="shopping-bag-header">
+        <div className="shopping-bag-container">
+            {b.open && <div className="shopping-bag-overlay" onClick={upd}></div>}
+            <div ref={bagRef} className={`mainC ${b.open ? 'close' : 'open'}`}>
+                <div className="shopping-bag-header">
                 <span className="bag-title">SHOPPING BAG</span>
                 <span className="item-count">({a.state})</span>
                 <button onClick={upd} className="close-btn">
@@ -68,14 +95,13 @@ function ShoppingBag() {
                     setTimeout(() => setWarning(false), 3000);
                 }
             }}>
-                Checkout
-            </div>
-
+                Checkout            </div>
             {/*<Link className="check" id="view" to={'/checkout'}><div>View Cart</div></Link>
             /* <button className="check" id="view">View Cart</button>
             <Link className="check" id="out" to={'/checkout'}><div>Checkout</div></Link>
             /*<button className="check" id="out">Checkout</button>*/}
         </div>
+    </div>
     );
 }
 export default ShoppingBag;

@@ -2,10 +2,10 @@ import { createContext, useState } from "react";
 
 export const Bag=createContext();
 const BagC=(props)=>{
-    const [open,setOpen]=useState(true);
+    const [open,setOpen]=useState(false);
     const [id,setid]=useState(null);
     function update(){
-       open===false?setOpen(true):setOpen(false);
+        setOpen(prev => !prev);
     }
     
     return(
